@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.менюToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -56,11 +56,15 @@
             this.menuTimer = new System.Windows.Forms.Timer(this.components);
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ordersTimer = new System.Windows.Forms.Timer(this.components);
+            this.delayUpdateOrderTimer = new System.Windows.Forms.Timer(this.components);
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.edited = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.id_menu = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -184,11 +188,13 @@
             this.closeOrderButton.TabIndex = 3;
             this.closeOrderButton.Text = "Закрыть заказ";
             this.closeOrderButton.UseVisualStyleBackColor = true;
+            this.closeOrderButton.Click += new System.EventHandler(this.CloseOrderButton_Click);
             // 
             // orderDataGridView
             // 
             this.orderDataGridView.AllowUserToAddRows = false;
             this.orderDataGridView.AllowUserToDeleteRows = false;
+            this.orderDataGridView.AllowUserToResizeRows = false;
             this.orderDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.orderDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column2,
@@ -196,11 +202,15 @@
             this.orderDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.orderDataGridView.Location = new System.Drawing.Point(2, 34);
             this.orderDataGridView.Margin = new System.Windows.Forms.Padding(2);
+            this.orderDataGridView.MultiSelect = false;
             this.orderDataGridView.Name = "orderDataGridView";
             this.orderDataGridView.RowHeadersVisible = false;
             this.orderDataGridView.RowTemplate.Height = 24;
+            this.orderDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.orderDataGridView.Size = new System.Drawing.Size(191, 396);
             this.orderDataGridView.TabIndex = 1;
+            this.orderDataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.OrderDataGridView_CellEndEdit);
+            this.orderDataGridView.SelectionChanged += new System.EventHandler(this.OrderDataGridView_SelectionChanged);
             // 
             // Column2
             // 
@@ -226,6 +236,7 @@
             this.addOrderButton.TabIndex = 2;
             this.addOrderButton.Text = "Добавить заказ";
             this.addOrderButton.UseVisualStyleBackColor = true;
+            this.addOrderButton.Click += new System.EventHandler(this.AddOrderButton_Click);
             // 
             // groupBox2
             // 
@@ -244,21 +255,28 @@
             // 
             this.listOrderDataGridView.AllowUserToAddRows = false;
             this.listOrderDataGridView.AllowUserToDeleteRows = false;
+            this.listOrderDataGridView.AllowUserToResizeRows = false;
             this.listOrderDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.listOrderDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn1,
             this.dataGridViewTextBoxColumn2,
             this.dataGridViewTextBoxColumn5,
             this.dataGridViewTextBoxColumn6,
-            this.Column3});
+            this.Column3,
+            this.edited,
+            this.id_menu});
             this.listOrderDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listOrderDataGridView.Location = new System.Drawing.Point(2, 19);
             this.listOrderDataGridView.Margin = new System.Windows.Forms.Padding(2);
+            this.listOrderDataGridView.MultiSelect = false;
             this.listOrderDataGridView.Name = "listOrderDataGridView";
             this.listOrderDataGridView.RowHeadersVisible = false;
             this.listOrderDataGridView.RowTemplate.Height = 24;
             this.listOrderDataGridView.Size = new System.Drawing.Size(263, 464);
             this.listOrderDataGridView.TabIndex = 1;
+            this.listOrderDataGridView.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.ListOrderDataGridView_CellBeginEdit);
+            this.listOrderDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ListOrderDataGridView_CellContentClick);
+            this.listOrderDataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.ListOrderDataGridView_CellEndEdit);
             // 
             // groupBox3
             // 
@@ -295,6 +313,7 @@
             // 
             this.menuDataGridView.AllowUserToAddRows = false;
             this.menuDataGridView.AllowUserToDeleteRows = false;
+            this.menuDataGridView.AllowUserToResizeRows = false;
             this.menuDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.menuDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn3,
@@ -302,9 +321,11 @@
             this.menuDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.menuDataGridView.Location = new System.Drawing.Point(2, 50);
             this.menuDataGridView.Margin = new System.Windows.Forms.Padding(2);
+            this.menuDataGridView.MultiSelect = false;
             this.menuDataGridView.Name = "menuDataGridView";
             this.menuDataGridView.RowHeadersVisible = false;
             this.menuDataGridView.RowTemplate.Height = 24;
+            this.menuDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.menuDataGridView.Size = new System.Drawing.Size(193, 416);
             this.menuDataGridView.TabIndex = 2;
             this.menuDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.MenuDataGridView_CellClick);
@@ -321,7 +342,6 @@
             this.menuFilterComboBox.Size = new System.Drawing.Size(193, 21);
             this.menuFilterComboBox.TabIndex = 0;
             this.menuFilterComboBox.DropDown += new System.EventHandler(this.MenuFilterComboBox_DropDown);
-            this.menuFilterComboBox.SelectedIndexChanged += new System.EventHandler(this.MenuFilterComboBox_SelectedIndexChanged);
             this.menuFilterComboBox.SelectionChangeCommitted += new System.EventHandler(this.MenuFilterComboBox_SelectionChangeCommitted);
             // 
             // menuFilterTextBox
@@ -355,6 +375,17 @@
             this.dataGridViewTextBoxColumn4.ReadOnly = true;
             this.dataGridViewTextBoxColumn4.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
+            // ordersTimer
+            // 
+            this.ordersTimer.Enabled = true;
+            this.ordersTimer.Interval = 200;
+            this.ordersTimer.Tick += new System.EventHandler(this.OrdersTimer_Tick);
+            // 
+            // delayUpdateOrderTimer
+            // 
+            this.delayUpdateOrderTimer.Interval = 3000;
+            this.delayUpdateOrderTimer.Tick += new System.EventHandler(this.DelayUpdateOrderTimer_Tick);
+            // 
             // dataGridViewTextBoxColumn1
             // 
             this.dataGridViewTextBoxColumn1.HeaderText = "id";
@@ -373,12 +404,12 @@
             // dataGridViewTextBoxColumn5
             // 
             this.dataGridViewTextBoxColumn5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn5.DefaultCellStyle = dataGridViewCellStyle3;
-            this.dataGridViewTextBoxColumn5.HeaderText = "+";
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn5.DefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridViewTextBoxColumn5.HeaderText = "-";
             this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
             this.dataGridViewTextBoxColumn5.ReadOnly = true;
-            this.dataGridViewTextBoxColumn5.Width = 38;
+            this.dataGridViewTextBoxColumn5.Width = 35;
             // 
             // dataGridViewTextBoxColumn6
             // 
@@ -390,12 +421,26 @@
             // Column3
             // 
             this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Column3.DefaultCellStyle = dataGridViewCellStyle4;
-            this.Column3.HeaderText = "-";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Column3.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Column3.HeaderText = "+";
             this.Column3.Name = "Column3";
             this.Column3.ReadOnly = true;
-            this.Column3.Width = 35;
+            this.Column3.Width = 38;
+            // 
+            // edited
+            // 
+            this.edited.HeaderText = "Был отредактирован";
+            this.edited.Name = "edited";
+            this.edited.ReadOnly = true;
+            this.edited.Visible = false;
+            // 
+            // id_menu
+            // 
+            this.id_menu.HeaderText = "id_menu";
+            this.id_menu.Name = "id_menu";
+            this.id_menu.ReadOnly = true;
+            this.id_menu.Visible = false;
             // 
             // Form1
             // 
@@ -453,11 +498,15 @@
         private System.Windows.Forms.Timer menuTimer;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.Timer ordersTimer;
+        private System.Windows.Forms.Timer delayUpdateOrderTimer;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn edited;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id_menu;
     }
 }
 

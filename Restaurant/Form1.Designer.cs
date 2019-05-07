@@ -48,16 +48,6 @@
             this.addOrderButton = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.listOrderDataGridView = new System.Windows.Forms.DataGridView();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.menuDataGridView = new System.Windows.Forms.DataGridView();
-            this.menuFilterComboBox = new System.Windows.Forms.ComboBox();
-            this.menuFilterTextBox = new System.Windows.Forms.TextBox();
-            this.menuTimer = new System.Windows.Forms.Timer(this.components);
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ordersTimer = new System.Windows.Forms.Timer(this.components);
-            this.delayUpdateOrderTimer = new System.Windows.Forms.Timer(this.components);
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -65,6 +55,16 @@
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.edited = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.id_menu = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.menuDataGridView = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.menuFilterComboBox = new System.Windows.Forms.ComboBox();
+            this.menuFilterTextBox = new System.Windows.Forms.TextBox();
+            this.menuTimer = new System.Windows.Forms.Timer(this.components);
+            this.ordersTimer = new System.Windows.Forms.Timer(this.components);
+            this.delayUpdateOrderTimer = new System.Windows.Forms.Timer(this.components);
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -278,114 +278,6 @@
             this.listOrderDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ListOrderDataGridView_CellContentClick);
             this.listOrderDataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.ListOrderDataGridView_CellEndEdit);
             // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.tableLayoutPanel2);
-            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox3.Location = new System.Drawing.Point(476, 2);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox3.Size = new System.Drawing.Size(201, 485);
-            this.groupBox3.TabIndex = 2;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Меню";
-            // 
-            // tableLayoutPanel2
-            // 
-            this.tableLayoutPanel2.ColumnCount = 1;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Controls.Add(this.menuDataGridView, 0, 2);
-            this.tableLayoutPanel2.Controls.Add(this.menuFilterComboBox, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.menuFilterTextBox, 0, 1);
-            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(2, 15);
-            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(2);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 3;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(197, 468);
-            this.tableLayoutPanel2.TabIndex = 0;
-            // 
-            // menuDataGridView
-            // 
-            this.menuDataGridView.AllowUserToAddRows = false;
-            this.menuDataGridView.AllowUserToDeleteRows = false;
-            this.menuDataGridView.AllowUserToResizeRows = false;
-            this.menuDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.menuDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn3,
-            this.dataGridViewTextBoxColumn4});
-            this.menuDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.menuDataGridView.Location = new System.Drawing.Point(2, 50);
-            this.menuDataGridView.Margin = new System.Windows.Forms.Padding(2);
-            this.menuDataGridView.MultiSelect = false;
-            this.menuDataGridView.Name = "menuDataGridView";
-            this.menuDataGridView.RowHeadersVisible = false;
-            this.menuDataGridView.RowTemplate.Height = 24;
-            this.menuDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.menuDataGridView.Size = new System.Drawing.Size(193, 416);
-            this.menuDataGridView.TabIndex = 2;
-            this.menuDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.MenuDataGridView_CellClick);
-            // 
-            // menuFilterComboBox
-            // 
-            this.menuFilterComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.menuFilterComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.menuFilterComboBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.menuFilterComboBox.FormattingEnabled = true;
-            this.menuFilterComboBox.Location = new System.Drawing.Point(2, 2);
-            this.menuFilterComboBox.Margin = new System.Windows.Forms.Padding(2);
-            this.menuFilterComboBox.Name = "menuFilterComboBox";
-            this.menuFilterComboBox.Size = new System.Drawing.Size(193, 21);
-            this.menuFilterComboBox.TabIndex = 0;
-            this.menuFilterComboBox.DropDown += new System.EventHandler(this.MenuFilterComboBox_DropDown);
-            this.menuFilterComboBox.SelectionChangeCommitted += new System.EventHandler(this.MenuFilterComboBox_SelectionChangeCommitted);
-            // 
-            // menuFilterTextBox
-            // 
-            this.menuFilterTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.menuFilterTextBox.Location = new System.Drawing.Point(2, 26);
-            this.menuFilterTextBox.Margin = new System.Windows.Forms.Padding(2);
-            this.menuFilterTextBox.Name = "menuFilterTextBox";
-            this.menuFilterTextBox.Size = new System.Drawing.Size(193, 20);
-            this.menuFilterTextBox.TabIndex = 1;
-            this.menuFilterTextBox.TextChanged += new System.EventHandler(this.MenuFilterTextBox_TextChanged);
-            // 
-            // menuTimer
-            // 
-            this.menuTimer.Enabled = true;
-            this.menuTimer.Tick += new System.EventHandler(this.MenuTimer_Tick);
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.HeaderText = "id";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.ReadOnly = true;
-            this.dataGridViewTextBoxColumn3.Visible = false;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.dataGridViewTextBoxColumn4.HeaderText = "Наименование";
-            this.dataGridViewTextBoxColumn4.MaxInputLength = 200;
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.ReadOnly = true;
-            this.dataGridViewTextBoxColumn4.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            // 
-            // ordersTimer
-            // 
-            this.ordersTimer.Enabled = true;
-            this.ordersTimer.Interval = 200;
-            this.ordersTimer.Tick += new System.EventHandler(this.OrdersTimer_Tick);
-            // 
-            // delayUpdateOrderTimer
-            // 
-            this.delayUpdateOrderTimer.Interval = 3000;
-            this.delayUpdateOrderTimer.Tick += new System.EventHandler(this.DelayUpdateOrderTimer_Tick);
-            // 
             // dataGridViewTextBoxColumn1
             // 
             this.dataGridViewTextBoxColumn1.HeaderText = "id";
@@ -441,6 +333,114 @@
             this.id_menu.Name = "id_menu";
             this.id_menu.ReadOnly = true;
             this.id_menu.Visible = false;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.tableLayoutPanel2);
+            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox3.Location = new System.Drawing.Point(476, 2);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox3.Size = new System.Drawing.Size(201, 485);
+            this.groupBox3.TabIndex = 2;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Меню";
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 1;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.Controls.Add(this.menuDataGridView, 0, 2);
+            this.tableLayoutPanel2.Controls.Add(this.menuFilterComboBox, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.menuFilterTextBox, 0, 1);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(2, 15);
+            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(2);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 3;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(197, 468);
+            this.tableLayoutPanel2.TabIndex = 0;
+            // 
+            // menuDataGridView
+            // 
+            this.menuDataGridView.AllowUserToAddRows = false;
+            this.menuDataGridView.AllowUserToDeleteRows = false;
+            this.menuDataGridView.AllowUserToResizeRows = false;
+            this.menuDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.menuDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn3,
+            this.dataGridViewTextBoxColumn4});
+            this.menuDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.menuDataGridView.Location = new System.Drawing.Point(2, 50);
+            this.menuDataGridView.Margin = new System.Windows.Forms.Padding(2);
+            this.menuDataGridView.MultiSelect = false;
+            this.menuDataGridView.Name = "menuDataGridView";
+            this.menuDataGridView.RowHeadersVisible = false;
+            this.menuDataGridView.RowTemplate.Height = 24;
+            this.menuDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.menuDataGridView.Size = new System.Drawing.Size(193, 416);
+            this.menuDataGridView.TabIndex = 2;
+            this.menuDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.MenuDataGridView_CellClick);
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.HeaderText = "id";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            this.dataGridViewTextBoxColumn3.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn4.HeaderText = "Наименование";
+            this.dataGridViewTextBoxColumn4.MaxInputLength = 200;
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            this.dataGridViewTextBoxColumn4.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // menuFilterComboBox
+            // 
+            this.menuFilterComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.menuFilterComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.menuFilterComboBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.menuFilterComboBox.FormattingEnabled = true;
+            this.menuFilterComboBox.Location = new System.Drawing.Point(2, 2);
+            this.menuFilterComboBox.Margin = new System.Windows.Forms.Padding(2);
+            this.menuFilterComboBox.Name = "menuFilterComboBox";
+            this.menuFilterComboBox.Size = new System.Drawing.Size(193, 21);
+            this.menuFilterComboBox.TabIndex = 0;
+            this.menuFilterComboBox.DropDown += new System.EventHandler(this.MenuFilterComboBox_DropDown);
+            this.menuFilterComboBox.SelectionChangeCommitted += new System.EventHandler(this.MenuFilterComboBox_SelectionChangeCommitted);
+            // 
+            // menuFilterTextBox
+            // 
+            this.menuFilterTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.menuFilterTextBox.Location = new System.Drawing.Point(2, 26);
+            this.menuFilterTextBox.Margin = new System.Windows.Forms.Padding(2);
+            this.menuFilterTextBox.Name = "menuFilterTextBox";
+            this.menuFilterTextBox.Size = new System.Drawing.Size(193, 20);
+            this.menuFilterTextBox.TabIndex = 1;
+            this.menuFilterTextBox.TextChanged += new System.EventHandler(this.MenuFilterTextBox_TextChanged);
+            // 
+            // menuTimer
+            // 
+            this.menuTimer.Enabled = true;
+            this.menuTimer.Tick += new System.EventHandler(this.MenuTimer_Tick);
+            // 
+            // ordersTimer
+            // 
+            this.ordersTimer.Enabled = true;
+            this.ordersTimer.Interval = 200;
+            this.ordersTimer.Tick += new System.EventHandler(this.OrdersTimer_Tick);
+            // 
+            // delayUpdateOrderTimer
+            // 
+            this.delayUpdateOrderTimer.Interval = 3000;
+            this.delayUpdateOrderTimer.Tick += new System.EventHandler(this.DelayUpdateOrderTimer_Tick);
             // 
             // Form1
             // 

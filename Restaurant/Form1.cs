@@ -17,6 +17,7 @@ namespace Restaurant
         private SqlConnection sqlConnection = null;
         int oldOrderId = -1;
         bool loading = true;
+        bool listSync = false;
 
         class ComboboxValue
         {
@@ -40,12 +41,12 @@ namespace Restaurant
             InitializeComponent();
         }
 
-        private async void Form1_Load(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
             string conectionString = ConfigurationManager.ConnectionStrings["RestourantDB"].ConnectionString;
-            sqlConnection = new SqlConnection(conectionString);
+            sqlConnection = new SqlConnection(conectionString+ ";MultipleActiveResultSets=True");
 
-            await sqlConnection.OpenAsync();
+            sqlConnection.Open();
 
             menuFilterComboBox.Items.Add(new ComboboxValue(Convert.ToInt32(-1), Convert.ToString("Все")));
             menuFilterComboBox.SelectedIndex = 0;
@@ -76,7 +77,7 @@ namespace Restaurant
             form.Show();
         }
 
-        private async void loadMenuList() {
+        private void loadMenuList() {
 
             menuDataGridView.Rows.Clear();
 
@@ -85,19 +86,19 @@ namespace Restaurant
             string query = "";
 
             if (menuFilterTextBox.TextLength != 0 && menuFilterComboBox.SelectedIndex == 0) {
-                query = "SELECT * FROM [menu] WHERE UPPER(name) like UPPER(@name)+'%' ORDER BY ordinem";
+                query = "SELECT * FROM [menu] WHERE UPPER(name) like UPPER(@name)+'%' AND available='1' ORDER BY ordinem";
             } 
             if (menuFilterTextBox.TextLength == 0 && menuFilterComboBox.SelectedIndex != 0)
             {
-                query = "SELECT menu.* FROM [menu], [category_list] WHERE category_list.id_category=@categoryID AND category_list.id_menu=menu.id_menu ORDER BY ordinem";
+                query = "SELECT menu.* FROM [menu], [category_list] WHERE category_list.id_category=@categoryID AND category_list.id_menu=menu.id_menu AND menu.available='1' ORDER BY ordinem";
             } 
             if (menuFilterTextBox.TextLength != 0 && menuFilterComboBox.SelectedIndex != 0)
             {
-                query = "SELECT menu.* FROM [menu], [category_list] WHERE category_list.id_category=@categoryID AND category_list.id_menu=menu.id_menu AND UPPER(name) like UPPER(@name)+'%' ORDER BY ordinem";
+                query = "SELECT menu.* FROM [menu], [category_list] WHERE category_list.id_category=@categoryID AND category_list.id_menu=menu.id_menu AND UPPER(name) like UPPER(@name)+'%' AND menu.available='1' ORDER BY ordinem";
             }
             if (menuFilterTextBox.TextLength == 0 && menuFilterComboBox.SelectedIndex == 0)
             {
-                query = "SELECT * FROM [menu] ORDER BY ordinem";
+                query = "SELECT * FROM [menu] WHERE available='1' ORDER BY ordinem";
             }
 
             SqlCommand loadCategoryList = new SqlCommand(query, sqlConnection);
@@ -112,11 +113,11 @@ namespace Restaurant
 
             try
             {
-                sqlReader = await loadCategoryList.ExecuteReaderAsync();
+                sqlReader = loadCategoryList.ExecuteReader();
 
                 menuDataGridView.Rows.Clear();
 
-                while (await sqlReader.ReadAsync())
+                while (sqlReader.Read())
                 {
                     int rowNumber = menuDataGridView.Rows.Add();
                     menuDataGridView.Rows[rowNumber].Cells[0].Value = Convert.ToInt32(sqlReader["id_menu"]);
@@ -134,19 +135,19 @@ namespace Restaurant
             }
         }
 
-        private async void loadCategoryComboBox() {
+        private void loadCategoryComboBox() {
             SqlDataReader sqlReader = null;
 
             SqlCommand loadCategoryList = new SqlCommand("SELECT * FROM [categories] ORDER BY ordinem", sqlConnection);
 
             try
             {
-                sqlReader = await loadCategoryList.ExecuteReaderAsync();
+                sqlReader = loadCategoryList.ExecuteReader();
 
                 for (int i = menuFilterComboBox.Items.Count-1; i > 1; i--)
                     menuFilterComboBox.Items.RemoveAt(i);
 
-                while (await sqlReader.ReadAsync())
+                while (sqlReader.Read())
                 {
                     menuFilterComboBox.Items.Add(new ComboboxValue(Convert.ToInt32(sqlReader["id_category"]), Convert.ToString(sqlReader["name"])));
                 }
@@ -206,6 +207,8 @@ namespace Restaurant
                     listOrderDataGridView.Rows[listIndex].Cells[4].Value = "+";
                     listOrderDataGridView.Rows[listIndex].Cells[5].Value = 0;
                     listOrderDataGridView.Rows[listIndex].Cells[6].Value = Convert.ToInt32(menuDataGridView.Rows[e.RowIndex].Cells[0].Value);
+                    listOrderDataGridView.Rows[listIndex].Cells[3].Selected = true;
+                    listOrderDataGridView.BeginEdit(true);
 
                     SqlDataReader sqlReader = null;
                     SqlCommand addOrderList = new SqlCommand("INSERT INTO [order_list] (id_orders, id_menu, count) VALUES(@id_orders, @id_menu, 1); SELECT IDENT_CURRENT('order_list') AS 'id'", sqlConnection);
@@ -233,6 +236,8 @@ namespace Restaurant
                 {
                     listOrderDataGridView.Rows[listIndex].Cells[3].Value = Convert.ToInt32(listOrderDataGridView.Rows[listIndex].Cells[3].Value) + 1;
                     listOrderDataGridView.Rows[listIndex].Cells[5].Value = 1;
+                    listOrderDataGridView.Rows[listIndex].Cells[3].Selected = true;
+                    listOrderDataGridView.BeginEdit(true);
                 }
             } else
                 MessageBox.Show("Перед добавлением позиции выберите заказ", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -240,22 +245,24 @@ namespace Restaurant
             delayUpdateOrderTimer.Start();
         }
 
-        private async void AddOrderButton_Click(object sender, EventArgs e)
+        private void AddOrderButton_Click(object sender, EventArgs e)
         {
             SqlCommand createOrder = new SqlCommand("INSERT INTO [orders] (time, closed, name) VALUES(GETDATE(), '0', IDENT_CURRENT('orders'))", sqlConnection);
 
             try
             {
-                await createOrder.ExecuteNonQueryAsync();
+                createOrder.ExecuteNonQuery();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
+            listSync = true;
             loadOrderGrid();
             orderDataGridView.CurrentCell = orderDataGridView.Rows[orderDataGridView.RowCount - 1].Cells[1];
             orderDataGridView.BeginEdit(true);
+            listSync = false;
         }
 
         private  void loadOrderGrid() {
@@ -264,10 +271,12 @@ namespace Restaurant
 
             try
             {
+                
                 sqlReader =  getOrderGrid.ExecuteReader();
 
                 orderDataGridView.Rows.Clear();
 
+                
                 while ( sqlReader.Read())
                 {
                     int rowNumber = orderDataGridView.Rows.Add();
@@ -283,6 +292,7 @@ namespace Restaurant
             {
                 if (sqlReader != null && !sqlReader.IsClosed)
                     sqlReader.Close();
+                
             }
         }
 
@@ -313,7 +323,7 @@ namespace Restaurant
 
         private void OrderDataGridView_SelectionChanged(object sender, EventArgs e)
         {
-            if (!loading)
+            if (!loading && !listSync)
             {
                 if (oldOrderId != -1) {
                     delayUpdateOrderTimer.Stop();
@@ -454,7 +464,15 @@ namespace Restaurant
 
         private void CloseOrderButton_Click(object sender, EventArgs e)
         {
+            if (orderDataGridView.SelectedCells.Count > 0)
+            {
+                delayUpdateOrderTimer.Stop();
+                updateListOrder();
 
+                ClosingOrder form = new ClosingOrder(sqlConnection, Convert.ToInt32(orderDataGridView.SelectedRows[0].Cells[0].Value));
+                form.ShowDialog();
+            } else
+                MessageBox.Show("Заказ не выбран", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }

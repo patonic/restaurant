@@ -78,6 +78,12 @@
     <Compile Include="Categories.Designer.cs">
       <DependentUpon>Categories.cs</DependentUpon>
     </Compile>
+    <Compile Include="ClosingOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ClosingOrder.Designer.cs">
+      <DependentUpon>ClosingOrder.cs</DependentUpon>
+    </Compile>
     <Compile Include="EditingCategory.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -121,6 +127,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Categories.resx">
       <DependentUpon>Categories.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ClosingOrder.resx">
+      <DependentUpon>ClosingOrder.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EditingCategory.resx">
       <DependentUpon>EditingCategory.cs</DependentUpon>

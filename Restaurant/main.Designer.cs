@@ -108,8 +108,9 @@
             // выходToolStripMenuItem
             // 
             this.выходToolStripMenuItem.Name = "выходToolStripMenuItem";
-            this.выходToolStripMenuItem.Size = new System.Drawing.Size(128, 26);
+            this.выходToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.выходToolStripMenuItem.Text = "&Выход";
+            this.выходToolStripMenuItem.Click += new System.EventHandler(this.ВыходToolStripMenuItem_Click);
             // 
             // менюToolStripMenuItem
             // 

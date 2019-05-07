@@ -42,8 +42,7 @@ namespace Restaurant
                     int rowNumber = listStoks.Rows.Add();
                     listStoks.Rows[rowNumber].Cells[0].Value = Convert.ToString(sqlReader["name"]);
                     listStoks.Rows[rowNumber].Cells[1].Value = Convert.ToString(sqlReader["count"]);
-                    listStoks.Rows[rowNumber].Cells[2].Value = Convert.ToString(sqlReader["reserved"]);
-                    listStoks.Rows[rowNumber].Cells[3].Value = Convert.ToInt32(sqlReader["id_stocks"]);
+                    listStoks.Rows[rowNumber].Cells[2].Value = Convert.ToInt32(sqlReader["id_stocks"]);
 
                     if (Convert.ToDouble(sqlReader["count"]) < Convert.ToDouble(sqlReader["threshold"]))
                         listStoks.Rows[rowNumber].Cells[1].Style.BackColor = Color.Red;
@@ -70,7 +69,7 @@ namespace Restaurant
         {
             if (listStoks.SelectedCells.Count > 0)
             {
-                EditingStocks form = new EditingStocks(sqlConnection, Convert.ToInt32(listStoks.SelectedRows[0].Cells[3].Value));
+                EditingStocks form = new EditingStocks(sqlConnection, Convert.ToInt32(listStoks.SelectedRows[0].Cells[2].Value));
                 form.ShowDialog();
                 await LoadStocksAsync();
             }
@@ -94,7 +93,7 @@ namespace Restaurant
                 if (MessageBox.Show("Вы действительно хотите удалить ресурс?", "Удаление ресурса", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation) == DialogResult.OK)
                 {
                     SqlCommand deleteStock = new SqlCommand("DELETE FROM [stocks] WHERE id_stocks=@id; DELETE FROM [recipes] WHERE id_stocks=@id;", sqlConnection);
-                    deleteStock.Parameters.AddWithValue("id", Convert.ToInt32(listStoks.SelectedRows[0].Cells[3].Value));
+                    deleteStock.Parameters.AddWithValue("id", Convert.ToInt32(listStoks.SelectedRows[0].Cells[2].Value));
 
                     try
                     {

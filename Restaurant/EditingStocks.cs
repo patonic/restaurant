@@ -48,7 +48,6 @@ namespace Restaurant
 
                     nameTextBox.Text = Convert.ToString(sqlReader["name"]);
                     countTextBox.Text = Convert.ToString(sqlReader["count"]);
-                    reservedTextBox.Text = Convert.ToString(sqlReader["reserved"]);
                     minCountTextBox.Text = Convert.ToString(sqlReader["threshold"]);
 
                     if (sqlReader != null && !sqlReader.IsClosed)
@@ -70,10 +69,9 @@ namespace Restaurant
         {
             if (id == -1)
             {
-                SqlCommand addStock = new SqlCommand("INSERT INTO [stocks] (name, count, reserved, threshold) VALUES (@name, @count, @reserved, @threshold)", sqlConnection);
+                SqlCommand addStock = new SqlCommand("INSERT INTO [stocks] (name, count, threshold) VALUES (@name, @count, @threshold)", sqlConnection);
                 addStock.Parameters.AddWithValue("name", nameTextBox.Text);
                 addStock.Parameters.AddWithValue("count", countTextBox.Text);
-                addStock.Parameters.AddWithValue("reserved", reservedTextBox.Text);
                 addStock.Parameters.AddWithValue("threshold", minCountTextBox.Text);
 
                 try
@@ -88,10 +86,9 @@ namespace Restaurant
                 }
             }
             else {
-                SqlCommand updateStock = new SqlCommand("UPDATE [stocks] SET name=@name, count=@count, reserved=@reserved, threshold=@threshold WHERE id_stocks=@id", sqlConnection);
+                SqlCommand updateStock = new SqlCommand("UPDATE [stocks] SET name=@name, count=@count, threshold=@threshold WHERE id_stocks=@id", sqlConnection);
                 updateStock.Parameters.AddWithValue("name", nameTextBox.Text);
                 updateStock.Parameters.AddWithValue("count", countTextBox.Text);
-                updateStock.Parameters.AddWithValue("reserved", reservedTextBox.Text);
                 updateStock.Parameters.AddWithValue("threshold", minCountTextBox.Text);
                 updateStock.Parameters.AddWithValue("id", id);
 

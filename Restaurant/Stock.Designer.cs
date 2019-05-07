@@ -38,7 +38,6 @@
             this.listStoks = new System.Windows.Forms.DataGridView();
             this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Count = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.reserved = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.listStoks)).BeginInit();
@@ -55,7 +54,7 @@
             this.updateStocksList});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(800, 27);
+            this.toolStrip1.Size = new System.Drawing.Size(526, 27);
             this.toolStrip1.TabIndex = 3;
             this.toolStrip1.TabStop = true;
             this.toolStrip1.Text = "toolStrip1";
@@ -114,7 +113,6 @@
             this.listStoks.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.name,
             this.Count,
-            this.reserved,
             this.id});
             this.listStoks.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listStoks.ImeMode = System.Windows.Forms.ImeMode.NoControl;
@@ -125,7 +123,7 @@
             this.listStoks.RowHeadersVisible = false;
             this.listStoks.RowTemplate.Height = 24;
             this.listStoks.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.listStoks.Size = new System.Drawing.Size(800, 423);
+            this.listStoks.Size = new System.Drawing.Size(526, 423);
             this.listStoks.TabIndex = 4;
             // 
             // name
@@ -138,19 +136,10 @@
             // 
             // Count
             // 
-            this.Count.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Count.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Count.HeaderText = "Количество";
             this.Count.Name = "Count";
             this.Count.ReadOnly = true;
-            this.Count.Width = 115;
-            // 
-            // reserved
-            // 
-            this.reserved.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.reserved.HeaderText = "Зарезервировано";
-            this.reserved.Name = "reserved";
-            this.reserved.ReadOnly = true;
-            this.reserved.Width = 155;
             // 
             // id
             // 
@@ -163,7 +152,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(526, 450);
             this.Controls.Add(this.listStoks);
             this.Controls.Add(this.toolStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
@@ -189,7 +178,6 @@
         private System.Windows.Forms.DataGridView listStoks;
         private System.Windows.Forms.DataGridViewTextBoxColumn name;
         private System.Windows.Forms.DataGridViewTextBoxColumn Count;
-        private System.Windows.Forms.DataGridViewTextBoxColumn reserved;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
     }
 }

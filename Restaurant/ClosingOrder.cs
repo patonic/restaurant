@@ -76,7 +76,9 @@ namespace Restaurant
 
         private void SubmitButton_Click(object sender, EventArgs e)
         {
-            SqlCommand submitOrder = new SqlCommand("UPDATE [orders] SET closed='1', sum=@sum WHERE id_orders=@id", sqlConnection);
+            SqlCommand submitOrder = new SqlCommand("UPDATE [orders] SET closed='1', sum=@sum WHERE id_orders=@id; " +
+                                                    "UPDATE [stocks] SET stocks.count=(stocks.count - recipes.quantity * order_list.count) FROM [order_list], [recipes] " +
+                                                    "WHERE order_list.id_orders=@id AND recipes.id_menu=order_list.id_menu AND stocks.id_stocks=recipes.id_stocks", sqlConnection);
             submitOrder.Parameters.AddWithValue("sum", sum);
             submitOrder.Parameters.AddWithValue("id", idOrder);
             try

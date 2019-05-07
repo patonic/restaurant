@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // Общие сведения об этой сборке предоставляются следующим набором
 // набора атрибутов. Измените значения этих атрибутов, чтобы изменить сведения,
 // связанные со сборкой.
-[assembly: AssemblyTitle("Restaurant")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Ресторан")]
+[assembly: AssemblyDescription("Система автоматизации ресторана")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Restaurant")]
+[assembly: AssemblyCompany("Данила Самарин")]
+[assembly: AssemblyProduct("Ресторан")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

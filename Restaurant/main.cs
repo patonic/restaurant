@@ -482,5 +482,10 @@ namespace Restaurant
             OrderHistory form = new OrderHistory(sqlConnection);
             form.Show();
         }
+
+        private void ВыходToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }

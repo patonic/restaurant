@@ -76,10 +76,12 @@ namespace Restaurant
 
         private void SubmitButton_Click(object sender, EventArgs e)
         {
-            SqlCommand delOrder = new SqlCommand("UPDATE [orders] SET closed='1', sum=@sum", sqlConnection);
+            SqlCommand submitOrder = new SqlCommand("UPDATE [orders] SET closed='1', sum=@sum WHERE id_orders=@id", sqlConnection);
+            submitOrder.Parameters.AddWithValue("sum", sum);
+            submitOrder.Parameters.AddWithValue("id", idOrder);
             try
             {
-                delOrder.ExecuteNonQuery();
+                submitOrder.ExecuteNonQuery();
             }
             catch (Exception ex)
             {

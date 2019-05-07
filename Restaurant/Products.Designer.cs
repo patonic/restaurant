@@ -215,6 +215,7 @@
             this.ClientSize = new System.Drawing.Size(567, 457);
             this.Controls.Add(this.listProducts);
             this.Controls.Add(this.toolStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "Products";
             this.Text = "Товары";
             this.Load += new System.EventHandler(this.Products_Load);

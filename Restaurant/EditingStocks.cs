@@ -49,6 +49,7 @@ namespace Restaurant
                     nameTextBox.Text = Convert.ToString(sqlReader["name"]);
                     countTextBox.Text = Convert.ToString(sqlReader["count"]);
                     reservedTextBox.Text = Convert.ToString(sqlReader["reserved"]);
+                    minCountTextBox.Text = Convert.ToString(sqlReader["threshold"]);
 
                     if (sqlReader != null && !sqlReader.IsClosed)
                         sqlReader.Close();

@@ -12,7 +12,7 @@ using System.Configuration;
 
 namespace Restaurant
 {
-    public partial class Form1 : Form
+    public partial class main : Form
     {
         private SqlConnection sqlConnection = null;
         int oldOrderId = -1;
@@ -36,7 +36,7 @@ namespace Restaurant
             }
         }
 
-        public Form1()
+        public main()
         {
             InitializeComponent();
         }
@@ -144,7 +144,7 @@ namespace Restaurant
             {
                 sqlReader = loadCategoryList.ExecuteReader();
 
-                for (int i = menuFilterComboBox.Items.Count-1; i > 1; i--)
+                for (int i = menuFilterComboBox.Items.Count-1; i > 0; i--)
                     menuFilterComboBox.Items.RemoveAt(i);
 
                 while (sqlReader.Read())
@@ -258,11 +258,9 @@ namespace Restaurant
                 MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            listSync = true;
             loadOrderGrid();
             orderDataGridView.CurrentCell = orderDataGridView.Rows[orderDataGridView.RowCount - 1].Cells[1];
             orderDataGridView.BeginEdit(true);
-            listSync = false;
         }
 
         private  void loadOrderGrid() {
@@ -471,8 +469,18 @@ namespace Restaurant
 
                 ClosingOrder form = new ClosingOrder(sqlConnection, Convert.ToInt32(orderDataGridView.SelectedRows[0].Cells[0].Value));
                 form.ShowDialog();
+                listSync = true;
+                loadOrderGrid();
+                listSync = false;
+                listOrderDataGridView.Rows.Clear();
             } else
                 MessageBox.Show("Заказ не выбран", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private void OrderHistoryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OrderHistory form = new OrderHistory(sqlConnection);
+            form.Show();
         }
     }
 }

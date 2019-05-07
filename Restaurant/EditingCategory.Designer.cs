@@ -81,7 +81,7 @@
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "EditingCategory";
-            this.Text = "EditingCategory";
+            this.Text = "Изменение категорий";
             this.Load += new System.EventHandler(this.EditingCategory_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

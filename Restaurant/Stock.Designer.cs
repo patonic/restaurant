@@ -166,8 +166,9 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.listStoks);
             this.Controls.Add(this.toolStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Name = "Stock";
-            this.Text = "Stock";
+            this.Text = "Склад";
             this.Load += new System.EventHandler(this.Stock_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();

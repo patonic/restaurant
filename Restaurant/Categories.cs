@@ -180,5 +180,15 @@ namespace Restaurant
 
             sync = false;
         }
+
+        private void ListCategories_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void ToolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
     }
 }

@@ -64,6 +64,7 @@
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.TabStop = true;
             this.toolStrip1.Text = "toolStrip1";
+            this.toolStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.ToolStrip1_ItemClicked);
             // 
             // addCategory
             // 
@@ -158,6 +159,7 @@
             this.listCategories.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.listCategories.Size = new System.Drawing.Size(473, 375);
             this.listCategories.TabIndex = 1;
+            this.listCategories.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ListCategories_CellContentClick);
             // 
             // ordinem
             // 

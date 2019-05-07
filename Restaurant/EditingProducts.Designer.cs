@@ -350,7 +350,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.nameTextBox);
             this.Controls.Add(this.label1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "EditingProducts";
             this.Text = "EditingProducts";
             this.Load += new System.EventHandler(this.EditingProducts_Load);

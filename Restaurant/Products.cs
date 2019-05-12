@@ -23,13 +23,14 @@ namespace Restaurant
             sqlConnection = connection;
 
             listProducts.Sort(listProducts.Columns[0], ListSortDirection.Ascending);
+            listProducts.Sort(listProducts.Columns[6], ListSortDirection.Descending);
         }
 
         private async Task LoadProductsAsync()
         {
             SqlDataReader sqlReader = null;
 
-            SqlCommand getProductsCommand = new SqlCommand("SELECT * FROM [menu]", sqlConnection);
+            SqlCommand getProductsCommand = new SqlCommand("SELECT * FROM [menu] ORDER BY available", sqlConnection);
 
             try
             {
@@ -44,6 +45,7 @@ namespace Restaurant
                     listProducts.Rows[rowNumber].Cells[1].Value = Convert.ToString(sqlReader["name"]);
                     listProducts.Rows[rowNumber].Cells[2].Value = Convert.ToString(sqlReader["price"]);
                     listProducts.Rows[rowNumber].Cells[5].Value = Convert.ToInt32(sqlReader["id_menu"]);
+                    listProducts.Rows[rowNumber].Cells[6].Value = Convert.ToInt32(sqlReader["available"]);
                     if (!Convert.ToBoolean(sqlReader["available"]))
                         listProducts.Rows[rowNumber].DefaultCellStyle.BackColor = Color.LightGray;
                 }
@@ -57,6 +59,7 @@ namespace Restaurant
                 if (sqlReader != null && !sqlReader.IsClosed)
                     sqlReader.Close();
                 listProducts.Sort(listProducts.Columns[0], ListSortDirection.Ascending);
+                listProducts.Sort(listProducts.Columns[6], ListSortDirection.Descending);
             }
 
             if (listProducts.Rows.Count > 0) {
@@ -119,6 +122,7 @@ namespace Restaurant
             }
 
             listProducts.Sort(listProducts.Columns[0], ListSortDirection.Ascending);
+            listProducts.Sort(listProducts.Columns[6], ListSortDirection.Descending);
         }
 
         private async void Products_Load(object sender, EventArgs e)

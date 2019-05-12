@@ -30,12 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Products));
             this.listProducts = new System.Windows.Forms.DataGridView();
-            this.ordinem = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.price = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.category = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.recipes = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.addProducts = new System.Windows.Forms.ToolStripButton();
             this.renameProducts = new System.Windows.Forms.ToolStripButton();
@@ -45,6 +39,13 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.productsUpper = new System.Windows.Forms.ToolStripButton();
             this.productsDowner = new System.Windows.Forms.ToolStripButton();
+            this.ordinem = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.category = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.recipes = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.available = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.listProducts)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -61,7 +62,8 @@
             this.price,
             this.category,
             this.recipes,
-            this.id});
+            this.id,
+            this.available});
             this.listProducts.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listProducts.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.listProducts.Location = new System.Drawing.Point(0, 30);
@@ -73,49 +75,6 @@
             this.listProducts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.listProducts.Size = new System.Drawing.Size(567, 427);
             this.listProducts.TabIndex = 3;
-            // 
-            // ordinem
-            // 
-            this.ordinem.HeaderText = "№";
-            this.ordinem.Name = "ordinem";
-            this.ordinem.ReadOnly = true;
-            this.ordinem.Visible = false;
-            // 
-            // name
-            // 
-            this.name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.name.HeaderText = "Название";
-            this.name.Name = "name";
-            this.name.ReadOnly = true;
-            this.name.Width = 101;
-            // 
-            // price
-            // 
-            this.price.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.price.HeaderText = "Цена";
-            this.price.Name = "price";
-            this.price.ReadOnly = true;
-            this.price.Width = 72;
-            // 
-            // category
-            // 
-            this.category.HeaderText = "Категории";
-            this.category.Name = "category";
-            this.category.ReadOnly = true;
-            // 
-            // recipes
-            // 
-            this.recipes.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.recipes.HeaderText = "Состав";
-            this.recipes.Name = "recipes";
-            this.recipes.ReadOnly = true;
-            // 
-            // id
-            // 
-            this.id.HeaderText = "id";
-            this.id.Name = "id";
-            this.id.ReadOnly = true;
-            this.id.Visible = false;
             // 
             // toolStrip1
             // 
@@ -208,6 +167,56 @@
             this.productsDowner.Text = "&↓";
             this.productsDowner.Click += new System.EventHandler(this.ProductsDowner_Click);
             // 
+            // ordinem
+            // 
+            this.ordinem.HeaderText = "№";
+            this.ordinem.Name = "ordinem";
+            this.ordinem.ReadOnly = true;
+            this.ordinem.Visible = false;
+            // 
+            // name
+            // 
+            this.name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.name.HeaderText = "Название";
+            this.name.Name = "name";
+            this.name.ReadOnly = true;
+            this.name.Width = 101;
+            // 
+            // price
+            // 
+            this.price.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.price.HeaderText = "Цена";
+            this.price.Name = "price";
+            this.price.ReadOnly = true;
+            this.price.Width = 72;
+            // 
+            // category
+            // 
+            this.category.HeaderText = "Категории";
+            this.category.Name = "category";
+            this.category.ReadOnly = true;
+            // 
+            // recipes
+            // 
+            this.recipes.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.recipes.HeaderText = "Состав";
+            this.recipes.Name = "recipes";
+            this.recipes.ReadOnly = true;
+            // 
+            // id
+            // 
+            this.id.HeaderText = "id";
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            this.id.Visible = false;
+            // 
+            // available
+            // 
+            this.available.HeaderText = "available";
+            this.available.Name = "available";
+            this.available.ReadOnly = true;
+            this.available.Visible = false;
+            // 
             // Products
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -245,5 +254,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn category;
         private System.Windows.Forms.DataGridViewTextBoxColumn recipes;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn available;
     }
 }

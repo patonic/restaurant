@@ -485,6 +485,12 @@ namespace Restaurant
 
         private void ВыходToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (oldOrderId != -1)
+            {
+                delayUpdateOrderTimer.Stop();
+                updateListOrder();
+            }
+
             Close();
         }
     }

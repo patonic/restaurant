@@ -108,7 +108,7 @@
             // выходToolStripMenuItem
             // 
             this.выходToolStripMenuItem.Name = "выходToolStripMenuItem";
-            this.выходToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.выходToolStripMenuItem.Size = new System.Drawing.Size(128, 26);
             this.выходToolStripMenuItem.Text = "&Выход";
             this.выходToolStripMenuItem.Click += new System.EventHandler(this.ВыходToolStripMenuItem_Click);
             // 
@@ -152,8 +152,8 @@
             // оToolStripMenuItem
             // 
             this.оToolStripMenuItem.Name = "оToolStripMenuItem";
-            this.оToolStripMenuItem.Size = new System.Drawing.Size(79, 24);
-            this.оToolStripMenuItem.Text = "С&правка";
+            this.оToolStripMenuItem.Size = new System.Drawing.Size(116, 24);
+            this.оToolStripMenuItem.Text = "&О программе";
             this.оToolStripMenuItem.Click += new System.EventHandler(this.оToolStripMenuItem_Click);
             // 
             // tableLayoutPanel1

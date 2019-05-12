@@ -89,7 +89,7 @@ namespace Restaurant
             if (listCategories.SelectedRows.Count > 0)
             {
                 if (MessageBox.Show("Вы действительно хотите удалить эту категорию?", "Удаление категории", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation) == DialogResult.OK) {
-                    SqlCommand deleteCategory = new SqlCommand("DELETE FROM [categories] WHERE id_category=@id", sqlConnection);
+                    SqlCommand deleteCategory = new SqlCommand("DELETE FROM [categories] WHERE id_category=@id; DELETE FROM [category_list] WHERE id_category=@id", sqlConnection);
                     deleteCategory.Parameters.AddWithValue("id", Convert.ToInt32(listCategories.SelectedRows[0].Cells[2].Value));
 
                     try

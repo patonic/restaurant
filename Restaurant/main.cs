@@ -467,7 +467,11 @@ namespace Restaurant
                 delayUpdateOrderTimer.Stop();
                 updateListOrder();
 
-                ClosingOrder form = new ClosingOrder(sqlConnection, Convert.ToInt32(orderDataGridView.SelectedRows[0].Cells[0].Value));
+                ClosingOrder form;
+                if (listOrderDataGridView.RowCount > 0)
+                    form = new ClosingOrder(sqlConnection, Convert.ToInt32(orderDataGridView.SelectedRows[0].Cells[0].Value));
+                else
+                    form = new ClosingOrder(sqlConnection, Convert.ToInt32(orderDataGridView.SelectedRows[0].Cells[0].Value), true);
                 form.ShowDialog();
                 listSync = true;
                 loadOrderGrid();

@@ -16,39 +16,44 @@ namespace Restaurant
         private SqlConnection sqlConnection;
         int idOrder;
         double sum = 0;
+        bool emptyOrder;
 
-        public ClosingOrder(SqlConnection connection, int id)
+        public ClosingOrder(SqlConnection connection, int id, bool empty = false)
         {
             InitializeComponent();
 
             sqlConnection = connection;
             idOrder = id;
+            emptyOrder = empty;
         }
 
         private void ClosingOrder_Load(object sender, EventArgs e)
         {
-            SqlDataReader sqlReader = null;
-
-            SqlCommand getSum = new SqlCommand("SELECT SUM(menu.price * order_list.count + 0) AS 'sum' FROM [order_list], [menu] WHERE order_list.id_orders=@id AND order_list.id_menu=menu.id_menu", sqlConnection);
-            getSum.Parameters.AddWithValue("id", idOrder);
-
-            try
+            if (!emptyOrder)
             {
-                sqlReader = getSum.ExecuteReader();
+                SqlDataReader sqlReader = null;
 
-                if (sqlReader.Read()) 
-                    sum = Convert.ToDouble(sqlReader["sum"]);
+                SqlCommand getSum = new SqlCommand("SELECT SUM(menu.price * order_list.count + 0) AS 'sum' FROM [order_list], [menu] WHERE order_list.id_orders=@id AND order_list.id_menu=menu.id_menu", sqlConnection);
+                getSum.Parameters.AddWithValue("id", idOrder);
 
-                sumLabel.Text = Convert.ToString(sum) + " руб.";
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                if (sqlReader != null && !sqlReader.IsClosed)
-                    sqlReader.Close();
+                try
+                {
+                    sqlReader = getSum.ExecuteReader();
+
+                    if (sqlReader.Read())
+                        sum = Convert.ToDouble(sqlReader["sum"]);
+
+                    sumLabel.Text = Convert.ToString(sum) + " руб.";
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                finally
+                {
+                    if (sqlReader != null && !sqlReader.IsClosed)
+                        sqlReader.Close();
+                }
             }
         }
 
@@ -61,6 +66,7 @@ namespace Restaurant
         private void DelButton_Click(object sender, EventArgs e)
         {
             SqlCommand delOrder = new SqlCommand("DELETE FROM [orders] WHERE id_orders=@id; DELETE FROM [order_list] WHERE id_orders=@id", sqlConnection);
+            delOrder.Parameters.AddWithValue("id", idOrder);
             try
             {
                 delOrder.ExecuteNonQuery();

@@ -185,7 +185,7 @@
             this.groupBox1.Size = new System.Drawing.Size(265, 599);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Спиок заказов";
+            this.groupBox1.Text = "Список заказов";
             // 
             // tableLayoutPanel3
             // 

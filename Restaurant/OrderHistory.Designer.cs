@@ -180,6 +180,7 @@
             this.ClientSize = new System.Drawing.Size(835, 568);
             this.Controls.Add(this.listOrder);
             this.Controls.Add(this.toolStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Name = "OrderHistory";
             this.Text = "История заказов";
             ((System.ComponentModel.ISupportInitialize)(this.listOrder)).EndInit();

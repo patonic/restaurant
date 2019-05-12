@@ -39,6 +39,7 @@
             this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Count = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.waring = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.listStoks)).BeginInit();
             this.SuspendLayout();
@@ -113,7 +114,8 @@
             this.listStoks.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.name,
             this.Count,
-            this.id});
+            this.id,
+            this.waring});
             this.listStoks.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listStoks.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.listStoks.Location = new System.Drawing.Point(0, 27);
@@ -148,6 +150,13 @@
             this.id.ReadOnly = true;
             this.id.Visible = false;
             // 
+            // waring
+            // 
+            this.waring.HeaderText = "waring";
+            this.waring.Name = "waring";
+            this.waring.ReadOnly = true;
+            this.waring.Visible = false;
+            // 
             // Stock
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -179,5 +188,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn name;
         private System.Windows.Forms.DataGridViewTextBoxColumn Count;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn waring;
     }
 }

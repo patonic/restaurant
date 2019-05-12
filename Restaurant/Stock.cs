@@ -45,7 +45,11 @@ namespace Restaurant
                     listStoks.Rows[rowNumber].Cells[2].Value = Convert.ToInt32(sqlReader["id_stocks"]);
 
                     if (Convert.ToDouble(sqlReader["count"]) < Convert.ToDouble(sqlReader["threshold"]))
+                    {
                         listStoks.Rows[rowNumber].Cells[1].Style.BackColor = Color.Red;
+                        listStoks.Rows[rowNumber].Cells[3].Value = 1;
+                    } else
+                        listStoks.Rows[rowNumber].Cells[3].Value = 0;
                 }
             }
             catch (Exception ex)
@@ -57,6 +61,7 @@ namespace Restaurant
                 if (sqlReader != null && !sqlReader.IsClosed)
                     sqlReader.Close();
                 listStoks.Sort(listStoks.Columns[0], ListSortDirection.Ascending);
+                listStoks.Sort(listStoks.Columns[3], ListSortDirection.Descending);
             }
         }
 

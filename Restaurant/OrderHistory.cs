@@ -51,6 +51,37 @@ namespace Restaurant
                 if (sqlReader != null && !sqlReader.IsClosed)
                     sqlReader.Close();
             }
+
+            if (listOrder.RowCount > 0) {
+                for (int i = 0; i < listOrder.Rows.Count; i++)
+                {
+                    string composition = "";
+                    SqlCommand getRecipesCommand = new SqlCommand("SELECT order_list.count, menu.name FROM [order_list], [menu] WHERE order_list.id_menu = menu.id_menu AND order_list.id_orders = @id_orders", sqlConnection);
+                    getRecipesCommand.Parameters.AddWithValue("id_orders", listOrder.Rows[i].Cells[0].Value);
+                    SqlDataReader sqlReaderSecond = null;
+
+                    try
+                    {
+                        sqlReaderSecond = getRecipesCommand.ExecuteReader();
+
+                        while (sqlReaderSecond.Read())
+                        {
+                            composition += Convert.ToString(sqlReaderSecond["name"]) + " Х " + Convert.ToString(sqlReaderSecond["count"]) + "; ";
+                        }
+
+                        listOrder.Rows[i].Cells[2].Value = composition;
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    finally
+                    {
+                        if (sqlReaderSecond != null && !sqlReaderSecond.IsClosed)
+                            sqlReaderSecond.Close();
+                    }
+                }
+            }
         }
 
         private void UpdateOrderList_Click(object sender, EventArgs e)

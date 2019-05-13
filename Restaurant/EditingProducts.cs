@@ -15,24 +15,21 @@ namespace Restaurant
     {
         private SqlConnection sqlConnection;
         private int id;
-
+        //класс для выпадающих списков
         class ComboboxValue
         {
             public int Id { get; private set; }
             public string Name { get; private set; }
-
             public ComboboxValue(int id, string name)
             {
                 Id = id;
                 Name = name;
             }
-
             public override string ToString()
             {
                 return Name;
             }
         }
-
         public EditingProducts(SqlConnection connection, int idTransf = -1)
         {
             InitializeComponent();
@@ -48,9 +45,9 @@ namespace Restaurant
                 this.Text = "Редактирование товара";
             }
         }
-
         private async void EditingProducts_Load(object sender, EventArgs e)
         {
+            //подгрузка данных в форму в случае переданного ID
             if (id > -1)
             {
                 SqlCommand loadProducts = new SqlCommand("SELECT name, price, available FROM [menu] WHERE id_menu=@id", sqlConnection);
@@ -60,19 +57,15 @@ namespace Restaurant
                 {
                     SqlDataReader sqlReader = await loadProducts.ExecuteReaderAsync();
                     await sqlReader.ReadAsync();
-
                     nameTextBox.Text = Convert.ToString(sqlReader["name"]);
                     priceTextBox.Text = Convert.ToString(sqlReader["price"]);
                     availableCheckBox.Checked = Convert.ToBoolean(sqlReader["available"]);
-
                     if (sqlReader != null && !sqlReader.IsClosed)
                         sqlReader.Close();
-
+                    //загрузка состава
                     SqlCommand loadRecipesGreed = new SqlCommand("SELECT stocks.id_stocks, stocks.name, recipes.quantity  FROM stocks, recipes  WHERE recipes.id_stocks = stocks.id_stocks AND recipes.id_menu = @id", sqlConnection);
                     loadRecipesGreed.Parameters.AddWithValue("id", id);
-
                     sqlReader = await loadRecipesGreed.ExecuteReaderAsync();
-
                     while (await sqlReader.ReadAsync())
                     {
                         int rowNumber = recipesDataGridView.Rows.Add();
@@ -80,22 +73,18 @@ namespace Restaurant
                         recipesDataGridView.Rows[rowNumber].Cells[1].Value = Convert.ToString(sqlReader["name"]);
                         recipesDataGridView.Rows[rowNumber].Cells[2].Value = Convert.ToDouble(sqlReader["quantity"]);
                     }
-
                    if (sqlReader != null && !sqlReader.IsClosed)
                         sqlReader.Close();
-
+                   //загрузка категорий
                     SqlCommand loadCategoryGreed = new SqlCommand("SELECT categories.name, categories.id_category FROM [categories], [category_list] WHERE category_list.id_category = categories.id_category AND category_list.id_menu = @id_menu", sqlConnection);
                     loadCategoryGreed.Parameters.AddWithValue("id_menu", id);
-
                     sqlReader = await loadCategoryGreed.ExecuteReaderAsync();
-
                     while (await sqlReader.ReadAsync())
                     {
                         int rowNumber = categoryDataGridView.Rows.Add();
                         categoryDataGridView.Rows[rowNumber].Cells[1].Value = Convert.ToString(sqlReader[0]);
                         categoryDataGridView.Rows[rowNumber].Cells[0].Value = Convert.ToString(sqlReader[1]);
                     }
-
                     if (sqlReader != null && !sqlReader.IsClosed)
                         sqlReader.Close();
                 }
@@ -104,17 +93,15 @@ namespace Restaurant
                     MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-
+            //загрузка содержимого выпадающего списка ресурсов
             SqlCommand loadRecipesList = new SqlCommand("SELECT id_stocks, name FROM [stocks]", sqlConnection);
             try
             {
                 SqlDataReader sqlReader = await loadRecipesList.ExecuteReaderAsync();
-
                 while (await sqlReader.ReadAsync())
                 {
                     recipesComboBox.Items.Add(new ComboboxValue(Convert.ToInt32(sqlReader["id_stocks"]), Convert.ToString(sqlReader["name"])));
                 }
-
                 if (sqlReader != null && !sqlReader.IsClosed)
                     sqlReader.Close();
             }
@@ -122,17 +109,15 @@ namespace Restaurant
             {
                 MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
+            //загрузка содержимого выпадающего списка категорий
             SqlCommand loadCategoryList = new SqlCommand("SELECT id_category, name FROM [categories]", sqlConnection);
             try
             {
                 SqlDataReader sqlReader = await loadCategoryList.ExecuteReaderAsync();
-
                 while (await sqlReader.ReadAsync())
                 {
                     categoryComboBox.Items.Add(new ComboboxValue(Convert.ToInt32(sqlReader["id_category"]), Convert.ToString(sqlReader["name"])));
                 }
-
                 if (sqlReader != null && !sqlReader.IsClosed)
                     sqlReader.Close();
             }
@@ -141,7 +126,6 @@ namespace Restaurant
                 MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
         private void addButton_Click(object sender, EventArgs e)
         {
             string error = "";
